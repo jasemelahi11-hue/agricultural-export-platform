@@ -3,472 +3,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه هوشمند بازار کشاورزی - منوی ناوبری پیشرفته</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>پرشیا کشاورز (Persia Agro) - سامانه جامع و هوشمند صادرات محصولات کشاورزی</title>
+    <!-- بارگذاری فونت پیشرفته و حرفه‌ای وزیرمتن -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/dist/vazirmatn-font.css" rel="stylesheet" type="text/css" />
     <style>
-        * {
+        :root {
+            --primary-color: #2e7d32;
+            --accent-color: #ffd54f; /* طلایی کهربایی لوکس برای عناصر اکشن */
+            --glass-bg: rgba(255, 255, 255, 0.04); /* پس‌زمینه فوق‌العاده شفاف */
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-color: #e0e0e0; /* خاکستری نقره‌ای مدرن */
+            --font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 17px;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, rgba(15, 30, 25, 0.3) 0%, rgba(20, 60, 25, 0.25) 100%), 
-                        url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80');
+            min-height: 100vh;
+            color: var(--text-color);
+            position: relative;
+            overflow-x: hidden;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-bottom: 2rem;
-        }
-        /* هدر به همراه منوی کشویی ناوبری */
-        .pro-header-card {
-            background: rgba(18, 28, 24, 0.85);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            max-width: 900px;
-            margin: 2rem auto 1rem auto;
-            padding: 2rem 1rem;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            position: relative;
-            width: calc(100% - 2rem);
-        }
-        .pro-header-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #d4af37, #38ef7d, #e67e22);
-            border-radius: 16px 16px 0 0;
-        }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 0.5rem;
-        }
-        .logo-icon {
-            font-size: 2.2rem;
-            animation: bounce 2s infinite;
-            filter: drop-shadow(0 2px 6px rgba(56, 239, 125, 0.5));
-        }
-        .pro-header-card h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-            letter-spacing: -0.5px;
-        }
-        .animated-subtext {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #f39c12;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-            opacity: 0.95;
-            margin-top: 0.4rem;
-            margin-bottom: 1.5rem;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            transition: background-image 1.5s ease-in-out;
         }
 
-        /* منوی کشویی تعاملی بالا (دو بخش ناوبری کشویی) */
-        .top-nav-dropdowns {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.2rem;
-        }
-        .dropdown-menu-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-toggle-btn {
-            background: rgba(10, 18, 15, 0.75);
-            color: #38ef7d;
-            border: 1px solid rgba(56, 239, 125, 0.3);
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            font-family: 'Vazirmatn', sans-serif;
-        }
-        .dropdown-toggle-btn:hover {
-            background: rgba(56, 239, 125, 0.15);
-            border-color: #38ef7d;
-            box-shadow: 0 0 10px rgba(56, 239, 125, 0.3);
-        }
-        .dropdown-content {
-            display: none;
+        /* لایه تاریک بسیار ملایم برای درخشش عکس‌های پس‌زمینه */
+        .overlay {
             position: absolute;
-            right: 0;
-            background: rgba(14, 23, 19, 0.95);
-            backdrop-filter: blur(12px);
-            min-width: 220px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            z-index: 100;
-            margin-top: 8px;
-            overflow: hidden;
-            text-align: right;
-        }
-        .dropdown-content a {
-            color: #d5dbdb;
-            padding: 10px 15px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.9rem;
-            transition: background 0.2s, color 0.2s;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        .dropdown-content a:hover {
-            background: #38ef7d;
-            color: #0c1411;
-            font-weight: 600;
-        }
-        /* نمایش منو هنگام هاوِر یا کلاس فعال */
-        .dropdown-menu-wrapper:hover .dropdown-content {
-            display: block;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: -1;
         }
 
-        .container {
-            max-width: 900px;
+        .main-wrapper {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
-            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
-        .section-box {
-            background: rgba(18, 28, 24, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 14px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+
+        /* --- کادربندی شیشه‌ای فوق‌العاده شفاف و مدرن --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            animation: fadeIn 0.8s ease-in-out;
         }
-        h2 {
-            color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-            margin-bottom: 1.5rem;
-            font-size: 1.35rem;
-            font-weight: 700;
-            border-bottom: 2px solid #38ef7d;
-            padding-bottom: 0.6rem;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-        }
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
             font-weight: 700;
-            color: #d5dbdb;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            font-size: 0.95rem;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Vazirmatn', sans-serif;
-            background: rgba(10, 18, 15, 0.75);
-            backdrop-filter: blur(6px);
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
             color: #ffffff;
-            transition: all 0.3s ease;
         }
-        input::placeholder, textarea::placeholder {
-            color: #889990;
+
+        header h1 span {
+            color: var(--accent-color);
         }
-        select option {
-            background-color: #121c18;
-            color: #ffffff;
-            padding: 10px;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #38ef7d;
-            box-shadow: 0 0 12px rgba(56, 239, 125, 0.4);
-            background: rgba(10, 18, 15, 0.95);
-        }
-        .smart-badge {
-            display: inline-block;
-            background: rgba(56, 239, 125, 0.15);
-            color: #38ef7d;
-            border: 1px solid rgba(56, 239, 125, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        .farmer-badge {
-            display: inline-block;
-            background: rgba(243, 156, 18, 0.15);
-            color: #f39c12;
-            border: 1px solid rgba(243, 156, 18, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        button {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            border: none;
-            padding: 1rem 1.5rem;
-            font-size: 1.05rem;
+
+        h2 {
+            font-size: 22px;
             font-weight: 700;
-            font-family: 'Vazirmatn', sans-serif;
-            border-radius: 8px;
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* دکمه‌های ناوبری و نقش‌ها */
+        .nav-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .custom-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 12px;
             cursor: pointer;
-            width: 100%;
-            box-shadow: 0 6px 20px rgba(56, 239, 125, 0.35);
-            transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 15px;
         }
-        button.farmer-btn {
-            background: linear-gradient(135deg, #d35400 0%, #f39c12 100%);
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.35);
+
+        .custom-btn.active, .custom-btn:hover {
+            background: var(--accent-color);
+            color: #0b2e13;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(255, 213, 79, 0.4);
+            border-color: var(--accent-color);
         }
-        button.farmer-btn:hover {
-            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.5);
+
+        /* پنل تنظیمات پیشرفته */
+        .settings-panel {
+            display: none;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.4s ease;
         }
-        button:hover {
-            opacity: 0.95;
-            transform: scale(1.01);
-            box-shadow: 0 8px 25px rgba(56, 239, 125, 0.5);
+
+        .settings-panel.active {
+            display: block;
         }
-        footer {
-            background: rgba(10, 15, 13, 0.7);
-            backdrop-filter: blur(8px);
-            color: #ccc;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: auto;
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: var(--text-color);
+        }
+
+        /* استایل فرم‌ها و جستجو */
+        .search-box {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        input, select {
+            flex: 1;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-size: 16px;
+            font-family: var(--font-family);
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(255, 213, 79, 0.2);
+        }
+
+        select option {
+            background: #1a2e1b;
+            color: white;
+            font-size: 16px;
+        }
+
+        .portal-panel {
+            display: none;
+        }
+
+        .portal-panel.active {
+            display: block;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 14px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: var(--font-family);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .action-btn:hover {
+            background: var(--accent-color);
+            color: #0b2e13;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 213, 79, 0.4);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* اعمال رنگ طلایی کهربایی لوکس برای عنوان محصولات */
+        .product-card h3 {
+            margin-top: 0;
+            color: #ffd54f;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .ai-output {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 4px solid var(--accent-color);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        @media(max-width: 768px) {
+            header { flex-direction: column; text-align: center; }
+            .search-box { flex-direction: column; }
+            .nav-group { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <header class="pro-header-card">
-        <div class="logo-area">
-            <span class="logo-icon">🌿</span>
-            <h1>سامانه هوشمند بازار کشاورزی</h1>
-        </div>
-        <p class="animated-subtext">مرکز تخصصی معاملات و زنجیره تامین انجیر، خرما و زعفران</p>
+    <div class="overlay"></div>
 
-        <!-- دو بخش دارای منوی کشویی در هدر -->
-        <div class="top-nav-dropdowns">
-            <!-- منوی کشویی اول: دسترسی سریع خریداران -->
-            <div class="dropdown-menu-wrapper">
-                <button class="dropdown-toggle-btn">
-                    🛒 منوی خریداران و سفارش‌ها ▾
-                </button>
-                <div class="dropdown-content">
-                    <a href="#buyer-section">ثبت سفارش جدید</a>
-                    <a href="#buyer-section">پیگیری وضعیت استعلام</a>
-                    <a href="#buyer-section">لیست قیمت‌های صادراتی</a>
+    <div class="main-wrapper">
+        <!-- هدر و منوی ناوبری اصلی -->
+        <header class="glass-card">
+            <h1><span>پرشیا کشاورز</span> | Persia Agro</h1>
+            <div class="nav-group">
+                <button class="custom-btn active" onclick="switchRole('buyer')">پنل خریدار</button>
+                <button class="custom-btn" onclick="switchRole('seller')">پنل فروشنده</button>
+                <button class="custom-btn" onclick="toggleSettings()" style="background: rgba(255,193,7,0.25); border-color: #ffc107;">⚙️ تنظیمات گرافیکی</button>
+            </div>
+        </header>
+
+        <!-- پنل تنظیمات پیشرفته -->
+        <div id="settingsPanel" class="settings-panel">
+            <h3 style="margin-top: 0; color: #ffc107; font-size: 18px;">تنظیمات پلتفرم و پس‌زمینه</h3>
+            <div class="settings-row">
+                <span>تغییر دستی عکس پس‌زمینه:</span>
+                <button class="custom-btn" onclick="changeBackground()" style="padding: 6px 14px; font-size: 14px;">تغییر تصویر بعدی</button>
+            </div>
+            <div class="settings-row">
+                <span>سرعت چرخش پس‌زمینه:</span>
+                <select id="bgSpeed" onchange="updateBgInterval()" style="padding: 6px; max-width: 160px; font-size: 14px;">
+                    <option value="10000">هر ۱۰ ثانیه</option>
+                    <option value="20000" selected>هر ۲۰ ثانیه</option>
+                    <option value="40000">هر ۴۰ ثانیه</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <span>حالت شفافیت کادرها:</span>
+                <button class="custom-btn" onclick="toggleGlassClarity()" style="padding: 6px 14px; font-size: 14px;">تغییر حالت شیشه‌ای</button>
+            </div>
+        </div>
+
+        <!-- پنل خریدار و جستجوی جامع محصولات -->
+        <div id="buyerPanel" class="portal-panel active">
+            <div class="glass-card">
+                <h2>جستجوی پیشرفته و فیلتر محصولات کشاورزی</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="جستجوی نام محصول (انجیر، خرما، زعفران...)">
+                    <select id="categorySelect" onchange="filterProducts()">
+                        <option value="all">همه محصولات (انجیر، خرما، زعفران)</option>
+                        <option value="figs">انجیر (استهبان و خشکبار)</option>
+                        <option value="dates">خرما (مضافتی، پیارم، زاهدی)</option>
+                        <option value="saffron">زعفران (نگین، سرگل)</option>
+                        <option value="fruits">میوه‌های تازه صادراتی</option>
+                        <option value="vegetables">سبزیجات و صیفی‌جات</option>
+                        <option value="nuts">خشکبار و پسته</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- منوی کشویی دوم: پنل تخصصی تأمین‌کنندگان -->
-            <div class="dropdown-menu-wrapper">
-                <button class="dropdown-toggle-btn" style="color: #f39c12; border-color: rgba(243, 156, 18, 0.3);">
-                    🌾 منوی کشاورزان و انبارداران ▾
-                </button>
-                <div class="dropdown-content">
-                    <a href="#farmer-section">ثبت بار جدید در انبار</a>
-                    <a href="#farmer-section">مشاهده بارهای آماده بارگیری</a>
-                    <a href="#farmer-section">راهنمای لجستیک و گمرک</a>
+            <!-- لیست محصولات با قابلیت فیلتر پویا -->
+            <div class="grid-container" id="productGrid">
+                
+                <div class="product-card" data-category="figs" data-name="انجیر خشک استهبان">
+                    <h3>انجیر خشک استهبان</h3>
+                    <p>پرشهد، کاملاً ارگانیک، سایز درشت (سه‌آلو و پرک) صادراتی ویژه بازارهای جهانی.</p>
+                    <p><strong>دسته‌بندی:</strong> انجیر</p>
+                    <p><strong>حداقل سفارش:</strong> ۵۰ کیلوگرم</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت انجیر در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+                <div class="product-card" data-category="dates" data-name="خرما مضافتی بم">
+                    <h3>خرما مضافتی بم</h3>
+                    <p>شیره‌دار، گوشتی، دست‌چین‌شده سردخانه‌ای ویژه صادرات به حوزه خلیج فارس و اروپا.</p>
+                    <p><strong>دسته‌بندی:</strong> خرما</p>
+                    <p><strong>حداقل سفارش:</strong> ۱۰۰ کیلوگرم</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت خرما در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+                <div class="product-card" data-category="saffron" data-name="زعفران نگین صادراتی">
+                    <h3>زعفران نگین صادراتی</h3>
+                    <p>گرید A+، عطر و رنگ‌دهی فوق‌العاده، بسته‌بندی استاندارد بین‌المللی لوکس.</p>
+                    <p><strong>دسته‌بندی:</strong> زعفران</p>
+                    <p><strong>حداقل سفارش:</strong> ۱۰ کیلوگرم</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت زعفران در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+                <div class="product-card" data-category="nuts" data-name="پسته اکبری درجه یک">
+                    <h3>پسته اکبری درجه یک</h3>
+                    <p>خندان، درشت، بدون پَک پوچ، سورتینگ لیزری دقیق.</p>
+                    <p><strong>دسته‌بندی:</strong> خشکبار</p>
+                    <p><strong>حداقل سفارش:</strong> ۵۰ کیلوگرم</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت پسته در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+                <div class="product-card" data-category="fruits" data-name="سیب قرمز درختی صادراتی">
+                    <h3>سیب قرمز درختی صادراتی</h3>
+                    <p>خوش‌رنگ، انبارمانی بالا، بسته‌بندی پالت‌بندی‌شده ویژه بازارهای منطقه.</p>
+                    <p><strong>دسته‌بندی:</strong> میوه‌های تازه</p>
+                    <p><strong>حداقل سفارش:</strong> ۵ تن</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت میوه در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+                <div class="product-card" data-category="vegetables" data-name="گوجه فرنگی گلخانه‌ای">
+                    <h3>گوجه فرنگی گلخانه‌ای</h3>
+                    <p>رگولار، ماندگاری بالا، مناسب صادرات منطقه‌ای و مصرف صنعتی.</p>
+                    <p><strong>دسته‌بندی:</strong> سبزیجات و صیفی‌جات</p>
+                    <p><strong>حداقل سفارش:</strong> ۲ تن</p>
+                    <button class="action-btn" style="width:100%; margin-top:12px;" onclick="alert('درخواست استعلام قیمت صیفی‌جات در پرشیا کشاورز ثبت شد.')">استعلام قیمت و خرید</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- پنل فروشنده -->
+        <div id="sellerPanel" class="portal-panel">
+            <div class="glass-card">
+                <h2>ثبت و عرضه محصول جدید جهت صادرات</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" placeholder="نام محصول (مثلاً: انجیر خشک استهبان / خرمای پیارم / زعفران)">
+                    <select style="width: 100%;">
+                        <option value="figs">انجیر</option>
+                        <option value="dates">خرما</option>
+                        <option value="saffron">زعفران</option>
+                        <option value="nuts">خشکبار و پسته</option>
+                        <option value="fruits">میوه‌های تازه</option>
+                        <option value="vegetables">سبزیجات و صیفی‌جات</option>
+                    </select>
+                    <input type="text" placeholder="موجودی انبار و ظرفیت صادرات ماهانه (تن/کیلو)">
+                    <button class="action-btn" onclick="alert('محصول شما با موفقیت در سامانه پرشیا کشاورز ثبت شد!')">ثبت و انتشار محصول در پلتفرم</button>
                 </div>
             </div>
         </div>
-    </header>
 
-    <div class="container">
-        <!-- بخش ثبت سفارش تخصصی خریداران -->
-        <div id="buyer-section" class="section-box">
-            <h2>🛒 ثبت سفارش خرید تخصصی (سفارش‌دهنده)</h2>
-            <div class="smart-badge">⚡ مجهز به موتور تطبیق هوشمند درخواست با تأمین‌کنندگان صادراتی</div>
-            
-            <form>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="buyerName">نام و نام خانوادگی خریدار / نماینده تجاری:</label>
-                        <input type="text" id="buyerName" placeholder="نام خود را وارد کنید" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="companyName">نام شرکت / مجموعه‌ بازرگانی:</label>
-                        <input type="text" id="companyName" placeholder="اختیاری - نام شرکت واردکننده/صادرکننده">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="productCategory">انتخاب محصول استراتژیک:</label>
-                        <select id="productCategory" required>
-                            <option value="" disabled selected>انتخاب کنید...</option>
-                            <option value="saffron">زعفران (مدل‌های صادراتی)</option>
-                            <option value="dates">خرما (مرغوب و سردخانه‌ای)</option>
-                            <option value="figs">انجیر استهبان (درجه یک و پرک)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="productGrade">نوع درجه‌بندی و گرید صادراتی:</label>
-                        <select id="productGrade" required>
-                            <option value="" disabled selected>ابتدا محصول را انتخاب کنید...</option>
-                            <!-- زعفران -->
-                            <option value="saffron-negin">زعفران نگین (ممتاز و تمام‌قرمز)</option>
-                            <option value="saffron-sargol">زعفران سرگل (ریزش‌کرده و تمیز)</option>
-                            <option value="saffron-pushal">زعفران پوشال (با خامه)</option>
-                            <!-- خرما -->
-                            <option value="dates-mozafati">خرما مضافتی بم (مخصوص صادرات و بازار داخلی)</option>
-                            <option value="dates-piaram">خرما پیارک (لوکس و شکلاتی)</option>
-                            <option value="dates-zahedi">خرما زاهدی خشک و نیمه‌خشک</option>
-                            <option value="dates-kabkab">خرما کبکاب مرغوب</option>
-                            <!-- انجیر -->
-                            <option value="figs-prak">انجیر استهبان پرک (دهن‌باز و درشت)</option>
-                            <option value="figs-101">انجیر استهبان گرید 101 (ممتاز)</option>
-                            <option value="figs-A">انجیر استهبان درجه یک (سایز متوسط)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="quantity">تناژ و مقدار مورد نیاز:</label>
-                        <input type="text" id="quantity" placeholder="مثلاً ۵۰۰ کیلوگرم یا ۲ تن" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="packagingType">نوع بسته‌بندی استاندارد:</label>
-                        <select id="packagingType">
-                            <option value="export">پکیجینگ لوکس صادراتی (وکیوم / فلزی)</option>
-                            <option value="bulk">بسته‌بندی فله کارتن مادر (صنعتی / عمده)</option>
-                            <option value="retail">بسته‌بندی خرده‌فروشی شرکتی</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="destination">مقصد تحویل بار (شهر / بندر / گمرک خروجی):</label>
-                        <input type="text" id="destination" placeholder="مثلاً تهران، گمرک بندرعباس، فرودگاه امام خمینی">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="extraNotes">شرایط خاص، استانداردها یا آنالیزهای مدنظر:</label>
-                        <textarea id="extraNotes" rows="3" placeholder="توضیحات تکمیلی پیرامون گواهی‌های بهداشتی، آنالیز آزمایشگاهی یا شرایط پرداخت..."></textarea>
-                    </div>
-                </div>
-
-                <button type="submit">ثبت درخواست هوشمند و استعلام برخط تأمین‌کنندگان</button>
-            </form>
-        </div>
-
-        <!-- بخش پنل پیشرفته کشاورزان و تأمین‌کنندگان -->
-        <div id="farmer-section" class="section-box">
-            <h2>🌾 پنل اختصاصی کشاورزان و واحدهای فرآوری (تأمین‌کننده)</h2>
-            <div class="farmer-badge">🌱 ثبت بار مستقیم از باغ، سردخانه و انبار مکانیزه با قیمت بی‌واسطه</div>
-            
-            <form>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="farmerName">نام و نام خانوادگی کشاورز / مدیر انبار:</label>
-                        <input type="text" id="farmerName" placeholder="نام خود را وارد کنید" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="farmRegion">منطقه دقیق برداشت و تولید:</label>
-                        <select id="farmRegion" required>
-                            <option value="" disabled selected>انتخاب استان / شهر قطب...</option>
-                            <option value="estahban">استهبان (قطب انجیر جهان)</option>
-                            <option value="bam">بم و جنوب کرمان (قطب خرمای مضافتی)</option>
-                            <option value="hormozgan">هرمزگان / حاجی‌آباد (قطب خرمای پیارک)</option>
-                            <option value="khorasan">خراسان رضوی / جنوبی (قطب زعفران جهان)</option>
-                            <option value="other">سایر مناطق تخصصی</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="supplyProduct">محصول قابل عرضه:</label>
-                        <select id="supplyProduct" required>
-                            <option value="" disabled selected>انتخاب محصول...</option>
-                            <option value="saffron">زعفران خالص صادراتی</option>
-                            <option value="dates">خرمای مرغوب سردخانه‌ای</option>
-                            <option value="figs">انجیر خشک استهبان</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="availableVolume">حجم و تناژ آماده بارگیری:</label>
-                        <input type="text" id="availableVolume" placeholder="مثلاً ۳ تن آماده در انبار" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="harvestYear">سال زراعی / کیفیت برداشت:</label>
-                        <input type="text" id="harvestYear" placeholder="مثلاً برداشت تازه (نوبرانه) سال 1405">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="storageStatus">وضعیت نگهداری و انبارداری:</label>
-                        <select id="storageStatus">
-                            <option value="cold-storage">سردخانه مجهز زیر صفر (استاندارد صادراتی)</option>
-                            <option value="dry-warehouse">انبار مکانیزه مجهز به تهویه مطبوع</option>
-                            <option value="direct-farm">بارگیری مستقیم از باغ و سورتینگ</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="labAnalysis">مشخصات فنی و نتایج آزمایشگاهی (عیار، رطوبت، سایز):</label>
-                        <textarea id="labAnalysis" rows="3" placeholder="جزئیات عیار زعفران، درصد رطوبت و شیرینی خرما، یا سایز (درشت/متوسط) انجیر..."></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="farmer-btn">ثبت بار در بستر لجستیک و اتصال به بازار خریداران</button>
-            </form>
+        <!-- بخش هوش مصنوعی و تحلیل بازار -->
+        <div class="glass-card" style="margin-top: 30px; text-align: center;">
+            <h2>دستیار هوش مصنوعی تحلیل بازار کشاورزی</h2>
+            <p style="font-size: 17px;">برای دریافت تحلیل لحظه‌ای ترندهای صادراتی و پیش‌بینی تقاضای جهانی کلیک کنید:</p>
+            <button class="action-btn" onclick="runAI()">دریافت تحلیل هوشمند بازار</button>
+            <div class="ai-output" id="aiOutput">آماده پردازش درخواست‌های تجاری شما در پرشیا کشاورز...</div>
         </div>
     </div>
 
-    <footer>
-        <p>تمامی حقوق محفوظ است &copy; 2026</p>
-    </footer>
+    <script>
+        const bgImages = [
+            'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=1920&q=80'
+        ];
 
+        let currentBgIndex = 0;
+        let bgIntervalTime = 20000;
+        let bgTimer;
+
+        function changeBackground() {
+            document.body.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+            currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+        }
+
+        function startBgTimer() {
+            clearInterval(bgTimer);
+            bgTimer = setInterval(changeBackground, bgIntervalTime);
+        }
+
+        function updateBgInterval() {
+            bgIntervalTime = parseInt(document.getElementById('bgSpeed').value);
+            startBgTimer();
+        }
+
+        changeBackground();
+        startBgTimer();
+
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            panel.classList.toggle('active');
+        }
+
+        let isUltraClear = true;
+        function toggleGlassClarity() {
+            isUltraClear = !isUltraClear;
+            const root = document.documentElement;
+            if(isUltraClear) {
+                root.style.setProperty('--glass-bg', 'rgba(255, 255, 255, 0.04)');
+                alert('حالت شیشه‌ای بسیار شفاف فعال شد.');
+            } else {
+                root.style.setProperty('--glass-bg', 'rgba(0, 0, 0, 0.4)');
+                alert('حالت تیره و مات فعال شد.');
+            }
+        }
+
+        function switchRole(role) {
+            const buyerBtn = document.querySelectorAll('.nav-group .custom-btn')[0];
+            const sellerBtn = document.querySelectorAll('.nav-group .custom-btn')[1];
+            const buyerPanel = document.getElementById('buyerPanel');
+            const sellerPanel = document.getElementById('sellerPanel');
+
+            if(role === 'buyer') {
+                buyerBtn.classList.add('active');
+                sellerBtn.classList.remove('active');
+                buyerPanel.classList.add('active');
+                sellerPanel.classList.remove('active');
+            } else {
+                sellerBtn.classList.add('active');
+                buyerBtn.classList.remove('active');
+                sellerPanel.classList.add('active');
+                buyerPanel.classList.remove('active');
+            }
+        }
+
+        function filterProducts() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categorySelect').value;
+            const cards = document.querySelectorAll('.product-card');
+
+            cards.forEach(card => {
+                const productName = card.getAttribute('data-name').toLowerCase();
+                const productCategory = card.getAttribute('data-category');
+
+                const matchesSearch = productName.includes(searchInput);
+                const matchesCategory = (selectedCategory === 'all' || productCategory === selectedCategory);
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function runAI() {
+            const output = document.getElementById('aiOutput');
+            output.innerHTML = "⏳ در حال استعلام قیمت و پردازش داده‌های تجاری بازار جهانی در پرشیا کشاورز...";
+            setTimeout(() => {
+                output.innerHTML = "✅ گزارش تحلیل هوشمند: تقاضا برای محصولات استراتژیک پرشیا کشاورز (انجیر، خرما، زعفران) در بازارهای بین‌المللی صعودی است. سیستم آماده اتصال به درگاه‌های تجاری است.";
+            }, 1200);
+        }
+    </script>
 </body>
 </html>
 
